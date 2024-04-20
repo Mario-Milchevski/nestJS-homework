@@ -20,7 +20,7 @@ export class SongsController {
     getSongs(@Query() query: SongQueryDto): SongResponseDto[] {
         return this.songService.getSongs(query);
     }
-    @Get(':artistId')
+    @Get('/artist/:artistId')
     getSongsByArtistId(@Param('artistId') artistId: string): SongResponseDto[] {
         const parsedId = Number(artistId)
         return this.songService.getSongsByArtistId(parsedId);
