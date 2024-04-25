@@ -1,5 +1,6 @@
 import { Transform } from "class-transformer";
 import {
+    IsDateString,
     IsInt,
     IsNotEmpty,
     IsString,
@@ -65,12 +66,11 @@ export class SongCreateDto {
     })
     genre: string;
 
-    // @Transform(({ value }) => new Date(value))
-    // @IsDateString()
-    // @ApiProperty({
-    //     type: String,
-    //     description: "The date of the song's release",
-    //     example: '2024-04-22T12:34:26.559Z',
-    // })
-    // releaseDate: string | null;
+    @IsDateString()
+    @ApiProperty({
+        type: String,
+        description: "The date of the song's release",
+        example: '2024-04-22T12:34:26.559Z',
+    })
+    releaseDate: string;
 }

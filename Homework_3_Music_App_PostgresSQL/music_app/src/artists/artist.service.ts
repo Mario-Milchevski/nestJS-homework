@@ -1,22 +1,38 @@
-import { Injectable, NotFoundException, Body } from '@nestjs/common';
+import { Injectable, NotFoundException, Body, Query } from '@nestjs/common';
 import { ArtistQueryDto } from './dtos/artist-query.dto';
 import { ArtistCreateDto } from './dtos/artist-create.dto';
 import { ArtistUpdateDto } from './dtos/artist-update.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Artist } from './artist.entity';
-import { Repository } from 'typeorm';
+import { FindOperator, Repository } from 'typeorm';
 
 @Injectable()
 export class ArtistService {
     constructor(@InjectRepository(Artist) private artistRepository: Repository<Artist>,) { }
-
     async getArtists(query: ArtistQueryDto): Promise<Artist[]> {
-        return this.artistRepository.find({
+
+        const artists = await this.artistRepository.find({
             relations: {
                 songs: true,
+            },
+            where: {
+                name: query.name,
+                country: query.country,
+                id: query.id,
             }
         });
+        const songsByGenre = artists.map(artist => {
+            const songsInGenre = artist.songs.filter(song => song.genre === query.genre)
+            const songsGenreArtists = songsInGenre.filter(async song => {
+                if (song) {
+                    await this.getArtist(song.artistId)
+                }
+            })
+            return songsGenreArtists
+        })
+        return artists
     }
+
 
     async getArtist(id: string): Promise<Artist> {
         return this.artistRepository.findOneByOrFail({ id })

@@ -27,7 +27,6 @@ export class Song {
         description: 'The name of the Song',
         example: 'Shape of you',
         required: true,
-
     })
     name: string;
 
@@ -42,16 +41,6 @@ export class Song {
         example: 'cd566a75-c19a-4385-9c2b-6940600312d4',
     })
     artistId: string | null;
-
-    // @Column({
-    //     name: 'artist_name',
-    // })
-    // @ApiProperty({
-    //     type: String,
-    //     description: "The name of song's Artist",
-    //     example: 'Ed Sheeran',
-    // })
-    // artistName: string;
 
     @Column()
     @ApiProperty({
@@ -69,23 +58,24 @@ export class Song {
     })
     genre: string;
 
-    // @Column({
-    //     name: 'release_date',
-    //     type: Date,
-    // })
-    // @ApiProperty({
-    //     type: Date,
-    //     description: 'Date when the song was first released',
-    //     example: '2024-04-22',
-    // })
-    // releaseDate: Date;
+    @Column({
+        name: 'release_date',
+        nullable: true,
+        type: Date,
+    })
+    @ApiProperty({
+        type: Date,
+        description: 'Date when the song was first released',
+        example: '2024-04-22',
+    })
+    releaseDate: Date;
 
     @ManyToOne(() => Artist, (artist) => artist.songs)
     @JoinColumn({
-        name: 'artist_id'
+        name: 'artist_id',
     })
     @ApiPropertyOptional({
-        type: Artist,
+        type: Artist
     })
     artist: Artist;
 

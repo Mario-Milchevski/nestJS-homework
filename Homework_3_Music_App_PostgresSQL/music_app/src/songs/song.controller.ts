@@ -5,7 +5,7 @@ import { SongCreateDto } from './dtos/song-create.dto';
 import { SongUpdateDto } from './dtos/song-update.dto';
 import { Song } from './song.entity';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
-import { ApiBody, ApiProperty, ApiPropertyOptional, ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
 
 @UsePipes(
     new ValidationPipe({
@@ -36,7 +36,7 @@ export class SongsController {
 
     // ------------- GET METHOD ( GET ALL BY 'ARTIST ID' ) ----------------
 
-    @Get(':artistId')
+    @Get('artist/:artistId')
     @ApiOperation({
         summary: 'Retrieve all songs by certain Artist'
     })
@@ -50,8 +50,9 @@ export class SongsController {
         type: String,
         description: 'Artist ID',
     })
+
     getArtistSongs(@Param('artistId') artistId: string): Promise<Song[]> {
-        return this.songService.getSongs(artistId)
+        return this.songService.getArtistSongs(artistId)
     }
 
     // ------------- POST METHOD ( CREATE ) ----------------

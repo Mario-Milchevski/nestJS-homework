@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class ArtistQueryDto {
     @IsString()
@@ -11,7 +11,11 @@ export class ArtistQueryDto {
     @Transform(({ value }) => value.toUpperCase())
     country?: string;
 
-    @IsNumber()
+    @IsUUID()
     @IsOptional()
     id?: string;
+
+    @IsString()
+    @IsOptional()
+    genre?: string;
 }

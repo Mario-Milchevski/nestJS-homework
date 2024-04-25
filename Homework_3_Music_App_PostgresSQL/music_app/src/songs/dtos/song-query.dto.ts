@@ -5,7 +5,6 @@ export class SongQueryDto {
     @IsOptional()
     name?: string;
     
-    @IsString()
     @IsOptional()
     artist?: string;
 

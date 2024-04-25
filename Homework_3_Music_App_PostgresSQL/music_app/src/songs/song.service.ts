@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, Body, Query } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { SongQueryDto } from './dtos/song-query.dto';
 import { SongCreateDto } from './dtos/song-create.dto';
 import { SongUpdateDto } from './dtos/song-update.dto';
@@ -12,14 +12,24 @@ export class SongService {
     private songRepository: Repository<Song>,) { }
 
     async getSongs(query: SongQueryDto): Promise<Song[]> {
+        console.log(query.artist);
+
         return this.songRepository.find({
+
             relations: {
                 artist: true,
             },
+            where: {
+                name: query.name,
+                genre: query.genre,
+            }
         });
+
     };
     async getArtistSongs(artistId: string): Promise<Song[]> {
-        return this.songRepository.findOneByOrFail({ artistId });
+        return this.songRepository.find({
+            where: { artistId }
+        });
     };
 
     async createSong(body: SongCreateDto): Promise<Song> {
