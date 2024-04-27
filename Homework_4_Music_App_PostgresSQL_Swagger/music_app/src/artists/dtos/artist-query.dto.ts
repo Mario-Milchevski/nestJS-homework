@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { IsOptional, IsString, IsUUID } from "class-validator";
+import { IsNumber, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class ArtistQueryDto {
     @IsString()
