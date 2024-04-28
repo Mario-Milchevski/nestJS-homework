@@ -25,6 +25,11 @@ export class ArtistController {
     return this.artistService.getArtists(query);
   }
 
+  @Get('genre/:genre')
+  getArtistsByGenre(@Param('genre') genre: string): Promise<Artist[]> {
+    return this.artistService.getArtistsByGenre(genre);
+  }
+
   // ------------- GET METHOD ( GET ONE 'ID' ) ----------------
 
   @Get(':id')

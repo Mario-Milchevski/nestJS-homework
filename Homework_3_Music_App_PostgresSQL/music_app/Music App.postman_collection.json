@@ -50,12 +50,7 @@
 								},
 								{
 									"key": "id",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "genre",
-									"value": "Euro Disco",
+									"value": "b166ff3c-0c5f-42d4-a8c9-36eb59e03409",
 									"disabled": true
 								}
 							]
@@ -95,11 +90,36 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "0"
+									"value": "b166ff3c-0c5f-42d4-a8c9-36eb59e03409"
 								}
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Get artists by genre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiKey}}/artists/genre/:genre",
+							"host": [
+								"{{apiKey}}"
+							],
+							"path": [
+								"artists",
+								"genre",
+								":genre"
+							],
+							"variable": [
+								{
+									"key": "genre",
+									"value": "Pop"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -135,7 +155,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "b166ff3c-0c5f-42d4-a8c9-36eb59e03409"
 								}
 							]
 						},
@@ -165,7 +185,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Hall and Oates\",\n    \"age\": 55,\n    \"country\": \"US\"\n}",
+							"raw": "{\n    \"name\": \"Bryan Adams\",\n    \"age\": 55,\n    \"country\": \"US\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -199,7 +219,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"name\": \"Maurice White\",\n        \"age\": 74,\n        \"country\": \"US\",\n    }",
+							"raw": "{\n    \"name\": \"Earth, Wind and Fire\",\n    \"age\": 54,\n    \"country\": \"US\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,7 +238,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "dfa3ab05-44ed-4454-99fb-33d37d5c0da7"
 								}
 							]
 						},
@@ -315,12 +335,12 @@
 								},
 								{
 									"key": "artist",
-									"value": "Modern Talking",
+									"value": "Tose Proeski",
 									"disabled": true
 								},
 								{
 									"key": "id",
-									"value": "1",
+									"value": "b166ff3c-0c5f-42d4-a8c9-36eb59e03409",
 									"disabled": true
 								}
 							]
@@ -361,7 +381,7 @@
 							"variable": [
 								{
 									"key": "artistId",
-									"value": ""
+									"value": "b166ff3c-0c5f-42d4-a8c9-36eb59e03409"
 								}
 							]
 						},
@@ -391,7 +411,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Man eater\",\n    \"artist\": \"Hall and Oates\",\n    \"artistId\": 2,\n    \"duration\": 209,\n    \"genre\": \"Euro Disco\",\n    \"releaseDate\": \"1979-06-10\"\n}",
+							"raw": "{\n    \"name\": \"September\",\n    \"artistId\": \"dfa3ab05-44ed-4454-99fb-33d37d5c0da7\",\n    \"duration\": 180,\n    \"genre\": \"Funk\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -425,7 +445,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Atlantis is calling\",\n    \"artist\": \"Modern Talking\",\n    \"duration\": 219,\n    \"genre\": \"Disco\",\n    \"releaseDate\": \"1986-06-10T00:00:00.001Z\"\n}",
+							"raw": "{\n    \"id\": \"e5e9e92f-517c-46d6-b957-12bc80722f68\",\n    \"name\": \"Identity Card\",\n    \"artistId\": \"dbe6d0b1-af29-4276-ae7f-7d65c4f803a9\",\n    \"duration\": 180,\n    \"genre\": \"Pop-folk\",\n    \"releaseDate\": \"2004-10-08\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -444,7 +464,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "0"
+									"value": "e5e9e92f-517c-46d6-b957-12bc80722f68"
 								}
 							]
 						},
@@ -484,7 +504,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "0"
+									"value": "a50e3684-6953-4090-af82-0fa10812659a"
 								}
 							]
 						},
