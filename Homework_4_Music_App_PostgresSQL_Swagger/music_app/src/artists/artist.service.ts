@@ -9,7 +9,9 @@ import { Song } from 'src/songs/song.entity';
 
 @Injectable()
 export class ArtistService {
-    constructor(@InjectRepository(Artist) private artistRepository: Repository<Artist>,) { }
+    constructor(
+        @InjectRepository(Artist) private artistRepository: Repository<Artist>,
+        @InjectRepository(Song) private songRepository: Repository<Song>,) { }
     async getArtists({
         name,
         country,
@@ -42,6 +44,29 @@ export class ArtistService {
         });
 
     }
+
+    async getArtistsByGenre(genre: string): Promise<Artist[]> {
+        const songs = await this.songRepository
+        .find({
+            where: {
+                genre: ILike(`%${genre}%`),
+                
+            },
+            relations: {
+                artist: true,
+            },
+            
+        })
+        let artists = [];
+        songs.forEach(song => {
+            const artistExists = artists.some(artist => artist.id === song.artist.id);
+            if (!artistExists) {
+                artists.push(song.artist);
+            }
+        });
+        return artists
+    }
+
 
     async getArtist(id: string): Promise<Artist> {
         return this.artistRepository.findOneByOrFail({ id })
