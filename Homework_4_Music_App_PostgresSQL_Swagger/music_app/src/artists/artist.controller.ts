@@ -6,6 +6,7 @@ import { ArtistQueryDto } from './dtos/artist-query.dto';
 import { Artist } from './artist.entity';
 import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Song } from 'src/songs/song.entity';
+import { Genre } from 'src/common/enums/genres.enum';
 
 // ------------------ PIPE -------------------
 
@@ -36,17 +37,17 @@ export class ArtistController {
   // ------------- GET METHOD ( GET ONE 'ID' ) ----------------
 
   @Get('genre/:genre')
-  @ApiOperation({ summary: 'Retrieve an Artist' })
+  @ApiOperation({ summary: 'Retrieve an Artist by Genre' })
   @ApiOkResponse({
-    description: 'Artist with that have at least one song in certain genre is retrieved',
+    description: 'Artists that have at least one song in certain genre is retrieved',
     type: Artist,
   })
   @ApiParam({
     name: 'genre',
-    type: String,
+    enum: Genre,
     description: 'Artist Genre',
   })
-  getArtistsByGenre(@Param('genre') genre: string): Promise<Artist[]> {
+  getArtistsByGenre(@Param('genre') genre: Genre): Promise<Artist[]> {
     return this.artistService.getArtistsByGenre(genre);
   }
 

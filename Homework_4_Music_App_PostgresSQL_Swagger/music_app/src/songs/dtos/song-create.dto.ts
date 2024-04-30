@@ -1,6 +1,7 @@
 import { Transform } from "class-transformer";
 import {
     IsDateString,
+    IsEnum,
     IsInt,
     IsNotEmpty,
     IsString,
@@ -8,6 +9,8 @@ import {
     MinLength
 } from "class-validator";
 import { ApiProperty } from '@nestjs/swagger';
+import { Song } from "../song.entity";
+import { Genre } from "src/common/enums/genres.enum";
 
 
 export class SongCreateDto {
@@ -54,17 +57,14 @@ export class SongCreateDto {
     })
     duration: number;
 
-    @IsString()
-    @IsNotEmpty()
-    @MinLength(3)
-    @Transform(({ value }) => value.trim().replace(/\s{2,}/g, ' '))
+    @IsEnum(Genre)
     @ApiProperty({
-        type: String,
-        description: "The name of the Song's Genre",
-        example: 'Pop-Rock',
-        minimum: 3,
+        enum: Genre,
+        description: 'The genre of the song',
+        example: Genre.POP,
+        required: true,
     })
-    genre: string;
+    genre: Genre;
 
     @IsDateString()
     @ApiProperty({

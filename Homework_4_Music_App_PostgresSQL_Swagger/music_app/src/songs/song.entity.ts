@@ -10,6 +10,7 @@ import {
     UpdateDateColumn
 } from "typeorm";
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Genre } from "src/common/enums/genres.enum";
 
 @Entity()
 export class Song {
@@ -50,13 +51,15 @@ export class Song {
     })
     duration: number;
 
-    @Column()
-    @ApiProperty({
-        type: String,
-        description: 'The genre of the Song',
-        example: 'Pop-Rock',
+    @Column({
+        enum: Genre,
+        enumName: 'Genre',
     })
-    genre: string;
+    @ApiProperty({
+        enum: Genre,
+        example: Genre.POP,
+      })
+    genre: Genre;
 
     @Column({
         name: 'release_date',

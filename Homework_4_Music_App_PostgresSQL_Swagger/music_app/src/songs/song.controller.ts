@@ -50,7 +50,6 @@ export class SongsController {
         type: String,
         description: 'Artist ID',
     })
-
     getArtistSongs(@Param('artistId') artistId: string): Promise<Song[]> {
         return this.songService.getArtistSongs(artistId)
     }

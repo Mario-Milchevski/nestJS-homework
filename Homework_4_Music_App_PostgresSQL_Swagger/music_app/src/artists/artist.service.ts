@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Artist } from './artist.entity';
 import { FindOperator, FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { Song } from 'src/songs/song.entity';
+import { Genre } from 'src/common/enums/genres.enum';
 
 @Injectable()
 export class ArtistService {
@@ -45,28 +46,16 @@ export class ArtistService {
 
     }
 
-    async getArtistsByGenre(genre: string): Promise<Artist[]> {
-        const songs = await this.songRepository
-        .find({
-            where: {
-                genre: ILike(`%${genre}%`),
-                
-            },
-            relations: {
-                artist: true,
-            },
-            
-        })
-        let artists = [];
-        songs.forEach(song => {
-            const artistExists = artists.some(artist => artist.id === song.artist.id);
-            if (!artistExists) {
-                artists.push(song.artist);
-            }
-        });
-        return artists
+    async getArtistsByGenre(genre: Genre): Promise<Artist[]> {
+        const artists = await this.artistRepository
+            .find({
+                relations: {
+                    songs: true,
+                },
+            })
+        const artistByGenre = artists.filter(artist => artist.songs.some(song => song.genre === genre))
+        return artistByGenre
     }
-
 
     async getArtist(id: string): Promise<Artist> {
         return this.artistRepository.findOneByOrFail({ id })
